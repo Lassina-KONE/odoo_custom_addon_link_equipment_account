@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="atos_equipement_action" model="ir.actions.act_window">
+            <field name="name">Equipements Atos</field>
+            <field name="res_model">atos_equipement</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <!-- <field name="context">{'search_default_actif':'True'}</field> -->
+    </record>
+
+    <!--tree view -->
+    <record id="atos_equipement_view_tree" model="ir.ui.view">
+            <field name="name">Liste Equipements Atos</field>
+            <field name="model">atos_equipement</field>
+            <field name="arch" type="xml">
+                <tree string="Liste" decoration-muted="actif == False">
+                    <field name="name"/>
+                    <field name="serial_number"/>
+                    <field name="part_number"/>
+                    <field name="marque_id" optional="True"/>
+                    <field name="description"/>
+                    <field name="compatiment_id" optional="True"/>
+                    <field name="date_in"/>
+                    <field name="state" widget="badge" decoration-success="actif == True"/>
+                    <field name="actif" widget="toggle_button" 
+                    options='{"active" : "En stock", "inactive" : "Sortie du stock"}'/>
+                    <field name="date_out" optional="True"/>
+                    <field name="raison_de_sortie" optional="True"/>
+                </tree>
+            </field>
+    </record>
+
+    <!--form view -->
+    <record id="atos_equipement_view_form" model="ir.ui.view">
+            <field name="name">Form Equipements Atos</field>
+            <field name="model">atos_equipement</field>
+            <field name="arch" type="xml">
+                <form string="Formulaire equipement">
+                    <header>
+                        <!-- <button name="marquer_comme_sortie" type="object" string="Sortie" icon="fa-bolt" /> -->
+                        <field name="actif" widget="boolean_toggle"/>
+                        <field name="state" widget="statusbar" clickable="True"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                        <group col="4">
+                            <h1>
+                                <field name="name" placeholder="Nom equipement"/>
+                            </h1>
+                        </group>
+                        </div>
+                        <group col="4">
+                                <label for="serial_number" />
+                            <h3>
+                                <field name="serial_number" placeholder="Numero de serie"/>
+                            </h3>
+                                <label for="part_number"/>
+                            <h3>
+                                <field name="part_number" placeholder="Numero de partition"/>
+                            </h3>
+                        </group>
+                        <notebook>
+                            <page string="Description">
+                                <group col="6">
+                                    <field name="compatiment_id" widget="selection" placeholder="Selectionner un compatiment"/>
+                                    <field name="marque_id" widget="selection" placeholder="Selectionner une marque"/>
+                                    <field name="date_in"/>
+                                </group>
+                                <group>
+                                    <field name="description" placeholder="Saisissez la description de l'equipement"/>
+                                </group>
+                            </page>
+                            <page string="Infos de sortie du stock">
+                                <group>
+                                    <field name="date_out"/>
+                                 </group>
+                                 <group>
+                                    <field name="raison_de_sortie"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+    </record>
+
+
+     <!--Search view -->
+    <record id="atos_equipement_view_search" model="ir.ui.view">
+            <field name="name">Recherche Equipements Atos</field>
+            <field name="model">atos_equipement</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name" filter_domain="[('name','ilike','self')]"/>
+                    <field name="serial_number"/>
+                    <field name="part_number"/>
+                    <filter string="En stock" name="actif" domain="[('actif','=','True')]"/>
+                    <filter string="Sortie" name="actif" domain="[('actif','=','')]"/> 
+                    <filter string="DELL" name="marque_id" domain="[('marque_id.name','=','DELL')]"/>
+                    <filter string="SAMSUNG" name="marque_id" domain="[('marque_id.name','=','SAMSUNG')]"/>
+                    <group expand="1" string="Group By">
+                        <filter string="Part Number" name="marque" context="{'group_by':'part_number'}"/>
+                    </group>
+                </search>
+            </field>
+    </record>
+
+
+</odoo>

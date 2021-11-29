@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="atos_compatiment_action" model="ir.actions.act_window">
+            <field name="name">Compatiments</field>
+            <field name="res_model">atos_compatiment</field>
+            <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+    <!--tree view -->
+    <record id="atos_compatiment_view_tree" model="ir.ui.view">
+            <field name="name">Liste compatiments</field>
+            <field name="model">atos_compatiment</field>
+            <field name="arch" type="xml">
+                <tree string="Liste">
+                    <field name="name"/>
+                    <field name="designation"/>
+                </tree>
+            </field>
+    </record>
+
+    <!--form view -->
+    <record id="atos_compatiment_view_form" model="ir.ui.view">
+            <field name="name">Form compatiments</field>
+            <field name="model">atos_compatiment</field>
+            <field name="arch" type="xml">
+                <form string="Formulaire compatiment">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Nom de la marque"/>
+                            </h1>
+                            <group>
+                                <field name="designation"/>
+                            </group>
+                        </div>
+                        <notebook>
+                            <page string="Equipements">
+                                <field name="equipement_ids" class="oe_read_only">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="part_number"/>
+                                        <field name="serial_number"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    
+                </form>
+            </field>
+    </record>
+
+
+</odoo>
