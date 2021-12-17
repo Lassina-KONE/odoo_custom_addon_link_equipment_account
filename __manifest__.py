@@ -1,14 +1,11 @@
 {
-    'name': 'Stock Atos',
+    'name': 'Facture Stock Atos',
     'version': '1.0',
-    'category': 'Inventory',
+    'category': 'Accounting',
+    'author': 'Lassina KONE',
     'description': "",
+    'depends': ['atos_stock','account'],
     'data': [
-        'security/ir.model.access.csv',
-        'views/atos_equipement_views.xml',
-        'views/atos_equipement_marque_views.xml',
-        'views/atos_compatiment_views.xml',
-        'views/atos_equipement_menu_views.xml'
         ],
     
     'installable': True,

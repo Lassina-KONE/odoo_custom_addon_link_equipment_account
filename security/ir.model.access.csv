@@ -1,4 +1,1 @@
 id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
-access_atos_equipement,atos_equipement,model_atos_equipement,base.group_user,1,1,1,1
-access_atos_equipement_marque,atos_equipement_marque,model_atos_equipement_marque,base.group_user,1,1,1,1
-access_compatiment,atos_compatiment,model_atos_compatiment,base.group_user,1,1,1,1
